@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct ContactsScreen: View {
+    @State private var isPresented = false
     let contacts: [Person]
     
     var body: some View {
         List(contacts) { contact in
-            NavigationLink(destination: DetailsScreen(contact: contact)){
+            NavigationLink(destination: DetailsScreen(isPresented: $isPresented, contact: contact)) {
                 Text("\(contact.fullName)")
             }
         }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DetailsScreen: View {
+    @Binding var isPresented: Bool
     let contact: Person
 
     var body: some View {
@@ -21,6 +22,10 @@ struct DetailsScreen: View {
             ContactRows(contact: contact)
             
             Spacer()
+            
+            Button("Done") {
+                isPresented.toggle()
+            }
         }
         .navigationTitle(contact.fullName)
         .navigationBarBackButtonHidden(true)
@@ -30,7 +35,7 @@ struct DetailsScreen: View {
 
 struct DetailsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        DetailsScreen(contact: Person.getPersonList().first ?? Person(id: 1, name: "Tim", surname: "Cook", phone: "113091904", email: "@mail.ru"))
+        DetailsScreen(isPresented: .constant(true), contact: Person.getPersonList().first ?? Person(id: 1, name: "Tim", surname: "Cook", phone: "113091904", email: "@mail.ru"))
     }
 }
 
